@@ -19,10 +19,18 @@ public class ClaimResource {
     ProcessEngine engine;
 
     @POST
-    public Map<String, String> submit(Map<String, Object> claim) {
+    public Map<String, Object> submit(Map<String, Object> claim) {
         var instance = engine.getRuntimeService()
                 .startProcessInstanceByKey("coverageCheck", claim); // json in http as bpmn process var;
 
-        return Map.of("processInstanceId", instance.getId());
+        var historicVariable = engine.getHistoryService()
+                .createHistoricVariableInstanceQuery()
+                .processInstanceId(instance.getId())
+                .variableName("withinCoverage")
+                .singleResult();
+
+        return Map.of(
+                "processInstanceId", instance.getId(),
+                "withinCoverage", historicVariable.getValue());
     }
 }

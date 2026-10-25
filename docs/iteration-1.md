@@ -188,3 +188,16 @@ BPMN Gateway
   ▼
 ClaimResource return Process Instance ID
 ```
+# GET the result of the process and response client by using the result(valid:true)
+1. Store the variable: The JavaDelegate uses execution.setVariable("withinCoverage", valid) to save the result.
+2. Execute the process: CIB seven runs the BPMN process and stores the variable in its history database (if history recording is enabled).
+3. Retrieve the variable: After the process finishes, use HistoryService to query the saved variable.
+like:
+```java
+var result = engine.getHistoryService()
+    .createHistoricVariableInstanceQuery()
+    .processInstanceId(instance.getId())
+    .variableName("withinCoverage")
+    .singleResult()
+    .getValue();
+```
