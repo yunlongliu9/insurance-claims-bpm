@@ -1,5 +1,6 @@
 package org.example.insurance;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,6 +32,27 @@ class BpmnEngineTest {
                                     "treatmentDate", "2026-06-15"));
 
             assertTrue(instance.isEnded());
+            var invalidInstance = engine.getRuntimeService()
+                    .startProcessInstanceByKey(
+                            "coverageCheck",
+                            java.util.Map.of(
+                                    "policyStart", "2026-01-01",
+                                    "policyEnd", "2026-12-31",
+                                    "treatmentDate", "2027-02-15"));
+
+            assertTrue(invalidInstance.isEnded());
+            var history = engine.getHistoryService();
+
+            assertEquals(1, history.createHistoricActivityInstanceQuery()
+                .processInstanceId(instance.getId())
+                .activityId("validEnd")
+                .count());
+
+            assertEquals(1, history.createHistoricActivityInstanceQuery()
+                .processInstanceId(invalidInstance.getId())
+                .activityId("invalidEnd")
+                .count());
+
         } finally {
             engine.close();
         }
