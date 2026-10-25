@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             targetNamespace="http://example.org/insurance">
+  <process id="coverageCheck" name="Versicherungszeitraum prüfen" isExecutable="true">
+    <startEvent id="start" />
+    <exclusiveGateway id="coverageGateway" />
+    <endEvent id="validEnd" name="Innerhalb des Versicherungszeitraums" />
+    <endEvent id="invalidEnd" name="Manuelle Prüfung" />
+
+    <sequenceFlow id="flow1" sourceRef="start" targetRef="coverageGateway" />
+    <sequenceFlow id="flow2" sourceRef="coverageGateway" targetRef="validEnd">
+      <conditionExpression xsi:type="tFormalExpression">${withinCoverage == true}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="coverageGateway" targetRef="invalidEnd">
+      <conditionExpression xsi:type="tFormalExpression">${withinCoverage == false}</conditionExpression>
+    </sequenceFlow>
+  </process>
+</definitions>
