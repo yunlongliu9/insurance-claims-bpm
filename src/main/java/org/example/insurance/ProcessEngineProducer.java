@@ -16,7 +16,11 @@ public class ProcessEngineProducer {
     @ApplicationScoped
     public ProcessEngine produceEngine() {
         engine = ProcessEngineConfiguration
-                .createStandaloneInMemProcessEngineConfiguration()
+                .createStandaloneProcessEngineConfiguration()
+                .setJdbcDriver("org.postgresql.Driver")
+                .setJdbcUrl("jdbc:postgresql://postgres:5432/insurance")
+                .setJdbcUsername("insurance")
+                .setJdbcPassword("insurance_dev")
                 .setDatabaseSchemaUpdate("true")
                 .buildProcessEngine();
 
