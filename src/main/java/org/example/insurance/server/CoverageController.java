@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @Path("/coverage/check")
-public class CoverageResource {
+public class CoverageController {
     @Inject
     CoverageService service;
 

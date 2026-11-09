@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Path("/claims")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ClaimResource {
+public class ClaimController {
 
         @Inject
         @RestClient
