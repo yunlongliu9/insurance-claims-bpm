@@ -1,4 +1,18 @@
 services:
+  cibseven:
+    image: cibseven/cibseven:2.2.0
+    ports:
+      - "8080:8080"
+    environment:
+      HISTORY_LEVEL: audit
+      DB_DRIVER: org.postgresql.Driver
+      DB_URL: jdbc:postgresql://postgres:5432/insurance
+      DB_USERNAME: insurance
+      DB_PASSWORD: insurance_dev
+    depends_on:
+      - postgres
+    volumes:
+      - ./config/bpm-platform.xml:/camunda/conf/bpm-platform.xml:ro
   document-agent:
     build:
       context: ../insurance-document-agent
@@ -12,7 +26,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     ports:
-      - "8080:8080"
+      - "8081:8081"
     volumes:
       - .:/app
       - maven-cache:/root/.m2

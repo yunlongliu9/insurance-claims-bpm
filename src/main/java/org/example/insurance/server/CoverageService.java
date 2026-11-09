@@ -1,4 +1,4 @@
-package org.example.insurance;
+package org.example.insurance.server;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import java.time.LocalDate;
@@ -11,9 +11,8 @@ public class CoverageService {
             LocalDate policyEnd,
             LocalDate treatmentDate) {
 
-        if (policyStart == null || policyEnd == null
-                || treatmentDate == null
-                || policyEnd.isBefore(policyStart)) {
+        if (policyStart == null || policyEnd == null ||
+                treatmentDate == null || policyEnd.isBefore(policyStart)) {
             return false;
         }
 

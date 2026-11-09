@@ -1,5 +1,6 @@
 package org.example.insurance;
 
+import org.example.insurance.server.CoverageService;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 

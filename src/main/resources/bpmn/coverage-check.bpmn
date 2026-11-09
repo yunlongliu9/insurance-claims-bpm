@@ -10,9 +10,39 @@
     <startEvent id="start" />
 
     <serviceTask id="checkCoverage"
-             name="Versicherungszeitraum prüfen"
-             cibseven:class="org.example.insurance.CoverageCheckDelegate" />
-    
+             name="Versicherungszeitraum prüfen">
+
+  <extensionElements>
+    <cibseven:connector>
+      <cibseven:connectorId>http-connector</cibseven:connectorId>
+      <cibseven:inputOutput>
+        <cibseven:inputParameter name="url">http://app:8081/coverage/check</cibseven:inputParameter>
+                  <cibseven:inputParameter name="method">POST</cibseven:inputParameter>
+                      <cibseven:inputParameter name="payload">
+            <cibseven:script scriptFormat="groovy"><![CDATA[
+              groovy.json.JsonOutput.toJson([
+                policyStart: execution.getVariable("policyStart"),
+                policyEnd: execution.getVariable("policyEnd"),
+                treatmentDate: execution.getVariable("treatmentDate")
+              ])
+            ]]></cibseven:script>
+          </cibseven:inputParameter>
+        <cibseven:inputParameter name="headers">
+          <cibseven:map>
+            <cibseven:entry key="Content-Type">application/json</cibseven:entry>
+          </cibseven:map>
+        </cibseven:inputParameter>
+
+            <cibseven:outputParameter name="withinCoverage">
+      <cibseven:script scriptFormat="groovy"><![CDATA[
+        new groovy.json.JsonSlurper().parseText(response).withinCoverage
+      ]]></cibseven:script>
+    </cibseven:outputParameter>
+      </cibseven:inputOutput>
+    </cibseven:connector>
+  </extensionElements>
+
+</serviceTask>
     
     <exclusiveGateway id="coverageGateway" />
     <endEvent id="validEnd" name="Innerhalb des Versicherungszeitraums" />
