@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_18bvba7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.52.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.24.0">
+  <decision id="evaluateRequirements" name="Evaluate Requirements">
+    <decisionTable id="DecisionTable_1snuqyf">
+      <input id="Input_1" label="dentalTreatmentFlag" biodi:width="192">
+        <inputExpression id="InputExpression_1" typeRef="boolean">
+          <text>dentalTreatmentFlag</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1vproaw" label="chronicConditionFlag">
+        <inputExpression id="LiteralExpression_08teiuc" typeRef="boolean">
+          <text>chronicConditionFlag</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1bd93h0" label="inpatientTreatmentFlag">
+        <inputExpression id="LiteralExpression_1q7c4vt" typeRef="boolean">
+          <text>inpatientTreatmentFlag</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1bd3065" label="psychotherapyFlag">
+        <inputExpression id="LiteralExpression_13m7z5i" typeRef="boolean">
+          <text>psychotherapyFlag</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0lhkete" label="spinalHistory">
+        <inputExpression id="LiteralExpression_1en7dw9" typeRef="boolean">
+          <text>spinalHistory</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_09ysv63" label="allergyFlag">
+        <inputExpression id="LiteralExpression_0mvq97i" typeRef="boolean">
+          <text>allergyFlag</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1gyzlm8" label="medicationOngoing">
+        <inputExpression id="LiteralExpression_10qt9sj" typeRef="boolean">
+          <text>medicationOngoing</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_16f5xob" label="bmi">
+        <inputExpression id="LiteralExpression_1p8dh99" typeRef="double">
+          <text>bmi</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1ttdtsr" label="age">
+        <inputExpression id="LiteralExpression_0w0r4uo" typeRef="integer">
+          <text>age</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_12a50l0" label="tariffBenefitLevel">
+        <inputExpression id="LiteralExpression_1wr69te" typeRef="string">
+          <text>tariffBenefitLevel</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0h8wvm1" label="employmentStatus">
+        <inputExpression id="LiteralExpression_11qdiw5" typeRef="string">
+          <text>employmentStatus</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0c7i0vh" label="priorAdverseDecision">
+        <inputExpression id="LiteralExpression_0zql276" typeRef="boolean">
+          <text>priorAdverseDecision</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="requirement" name="requirement" typeRef="string" />
+      <rule id="DecisionRule_127rlh3">
+        <inputEntry id="UnaryTests_1csyx1p">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0guusi7">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o19bjv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1nomsar">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0z5hvwe">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1se3h2j">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0yrq0em">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jaiota">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uijiya">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11arh1l">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kvccr6">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_009rljf">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ufu0wf">
+          <text>"Dental status report (doctor)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1cgen8b">
+        <inputEntry id="UnaryTests_1bvyktm">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18jlfbh">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ylpdv8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e8bdle">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hthq75">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pci2lb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wv23wu">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11v058a">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wfb49i">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w6tuzn">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jpe8ih">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mpb8c4">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hfazae">
+          <text>"Attending physician's report (doctor)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0cx1h4q">
+        <inputEntry id="UnaryTests_0veprdp">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06nrwwd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19jkfrr">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vk5rj1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12564e9">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gzd5q1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09p4qaw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1khbyjh">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1aw1jkl">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ic70wi">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14gbdtv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05az7s6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1iu90zz">
+          <text>"Hospital discharge letter (doctor)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1vwcwdg">
+        <inputEntry id="UnaryTests_0vohqyb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1yfw9q0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18nmrd2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s7btly">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1p35x8m">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0q6k8z9">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hfjwby">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a5w4j6">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_097skdd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1e2sg59">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0m9rp6b">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00dgnfb">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0hovk9l">
+          <text>"Mental health questionnaire (client), then therapy report (doctor) if treatment is recent"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0bq0jg9">
+        <inputEntry id="UnaryTests_0ocseho">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jmtit5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jc1l9g">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11m8gug">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_018djbd">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0u0xutn">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1iij8kn">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gt4eyi">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fq92rg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xeduzt">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n8327h">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ppditc">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0kh1ahi">
+          <text>"Back and spine questionnaire (client)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kzswhj">
+        <inputEntry id="UnaryTests_10hixj2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16dkdbq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03zyf1h">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bkbqa4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03d7p8b">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hkv69x">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wy5sfh">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dt4lzt">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06ia9t0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a8dh9t">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14o4smy">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1k562mf">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o486fq">
+          <text>"Allergy questionnaire (client)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_03pynf1">
+        <inputEntry id="UnaryTests_1a5j44t">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18mqjo8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xi03gw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xkhn1l">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08pt5e0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tgv86z">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01wrquy">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15hyzoq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lzczhm">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0csjpyd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qwml91">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ad6cqs">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_081irxd">
+          <text>"Current medication list (client)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1d7poo7">
+        <inputEntry id="UnaryTests_09qzahg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1inqtfu">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qa5muv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zqhhri">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19igcgx">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0keuufg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11m6r72">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jdldqp">
+          <text>&gt; 32</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0snll2s">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cu7rsg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n2gra1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a6mba7">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05t39ls">
+          <text>"Lab results: blood glucose, lipids, liver function (client)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_04d7785">
+        <inputEntry id="UnaryTests_188hkd1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hhqzrm">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0u3k39i">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_170lgg5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t8sv9z">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pt927b">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07efggk">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nq3qu7">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l3pzxc">
+          <text>&gt; 50</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1l3p45f">
+          <text>"premium"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r3hpg6">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_193w5k7">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12reqby">
+          <text>"Medical examination (client)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1h0cnpu">
+        <inputEntry id="UnaryTests_00ztynk">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jaushq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lwp937">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c59agv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1nqai4r">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xz3ucf">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gj4oox">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06gajvw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19zgv7y">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gvw7au">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r3clu1">
+          <text>"employee"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0evulkv">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fxnbb4">
+          <text>"Proof of income above the JAEG threshold (client)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05jt8k5">
+        <inputEntry id="UnaryTests_0fs5kct">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1e4yzx3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1md2z2j">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0240wo3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bjmdpe">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17j90m8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0k6uwjb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16qi9w3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nkwxqy">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ci6ba3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1h7tzxq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qaoq2w">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1752pxa">
+          <text>"Details of the earlier decision and its grounds (client)"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="Decision_0d7ionm_di" dmnElementRef="evaluateRequirements">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
