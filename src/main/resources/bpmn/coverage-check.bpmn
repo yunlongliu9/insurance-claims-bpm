@@ -2,7 +2,11 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xmlns:cibseven="http://camunda.org/schema/1.0/bpmn"
+    xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
              targetNamespace="http://example.org/insurance">
+
 <process id="coverageCheck"
          name="Versicherungszeitraum prüfen"
          isExecutable="true"
@@ -16,7 +20,10 @@
     <cibseven:connector>
       <cibseven:connectorId>http-connector</cibseven:connectorId>
       <cibseven:inputOutput>
-        <cibseven:inputParameter name="url">http://app:8081/coverage/check</cibseven:inputParameter>
+        <!-- <cibseven:inputParameter name="url">http://app:8081/coverage/check</cibseven:inputParameter> -->
+        <cibseven:inputParameter name="url">
+  ${quarkusBaseUrl.concat("/coverage/check")}
+</cibseven:inputParameter>
                   <cibseven:inputParameter name="method">POST</cibseven:inputParameter>
                       <cibseven:inputParameter name="payload">
             <cibseven:script scriptFormat="groovy"><![CDATA[
@@ -58,4 +65,55 @@
       <conditionExpression xsi:type="tFormalExpression">${withinCoverage == false}</conditionExpression>
     </sequenceFlow>
   </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_coverage">
+  <bpmndi:BPMNPlane id="BPMNPlane_coverage" bpmnElement="coverageCheck">
+
+    <!-- Nodes -->
+    <bpmndi:BPMNShape id="shape_start" bpmnElement="start">
+      <dc:Bounds x="100" y="200" width="36" height="36"/>
+    </bpmndi:BPMNShape>
+
+    <bpmndi:BPMNShape id="shape_checkCoverage" bpmnElement="checkCoverage">
+      <dc:Bounds x="200" y="175" width="120" height="80"/>
+    </bpmndi:BPMNShape>
+
+    <bpmndi:BPMNShape id="shape_coverageGateway" bpmnElement="coverageGateway" isMarkerVisible="true">
+      <dc:Bounds x="390" y="190" width="50" height="50"/>
+    </bpmndi:BPMNShape>
+
+    <bpmndi:BPMNShape id="shape_validEnd" bpmnElement="validEnd">
+      <dc:Bounds x="550" y="130" width="36" height="36"/>
+    </bpmndi:BPMNShape>
+
+    <bpmndi:BPMNShape id="shape_invalidEnd" bpmnElement="invalidEnd">
+      <dc:Bounds x="550" y="270" width="36" height="36"/>
+    </bpmndi:BPMNShape>
+
+    <!-- Connections -->
+    <bpmndi:BPMNEdge id="edge_flow1" bpmnElement="flow1">
+      <di:waypoint x="136" y="218"/>
+      <di:waypoint x="200" y="215"/>
+    </bpmndi:BPMNEdge>
+
+    <bpmndi:BPMNEdge id="edge_flow1b" bpmnElement="flow1b">
+      <di:waypoint x="320" y="215"/>
+      <di:waypoint x="390" y="215"/>
+    </bpmndi:BPMNEdge>
+
+    <bpmndi:BPMNEdge id="edge_flow2" bpmnElement="flow2">
+      <di:waypoint x="440" y="215"/>
+      <di:waypoint x="490" y="215"/>
+      <di:waypoint x="490" y="148"/>
+      <di:waypoint x="550" y="148"/>
+    </bpmndi:BPMNEdge>
+
+    <bpmndi:BPMNEdge id="edge_flow3" bpmnElement="flow3">
+      <di:waypoint x="440" y="215"/>
+      <di:waypoint x="490" y="215"/>
+      <di:waypoint x="490" y="288"/>
+      <di:waypoint x="550" y="288"/>
+    </bpmndi:BPMNEdge>
+
+  </bpmndi:BPMNPlane>
+</bpmndi:BPMNDiagram>
 </definitions>

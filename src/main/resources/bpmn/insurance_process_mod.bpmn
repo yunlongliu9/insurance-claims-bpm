@@ -490,6 +490,7 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0t9a0us_di" bpmnElement="Activity_17vwe9l">
         <dc:Bounds x="381" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0luorim_di" bpmnElement="Event_0jjl6pw">
         <dc:Bounds x="732" y="122" width="36" height="36" />
