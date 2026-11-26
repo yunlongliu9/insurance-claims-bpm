@@ -19,6 +19,7 @@ public class ApplicantMessageRoute extends RouteBuilder {
         // Consumer: from Artemis receive applicant messages
         from("jms:queue:applicant.create")
                 .routeId("applicant-consumer")
-                .log("Received applicant: ${body}");
+                .log("Received applicant: ${body}")
+                .bean("applicantService", "saveApplicant");
     }
 }
