@@ -21,5 +21,13 @@ public class ApplicantMessageRoute extends RouteBuilder {
                 .routeId("applicant-consumer")
                 .log("Received applicant: ${body}")
                 .bean("applicantService", "saveApplicant");
+
+        from("direct:renewApplicant")
+                .routeId("applicant-renew-producer")
+                .to("jms:queue:applicant.renew");
+
+        from("jms:queue:applicant.renew")
+                .routeId("applicant-renew-consumer")
+                .bean("applicantService", "renewApplicant");
     }
 }

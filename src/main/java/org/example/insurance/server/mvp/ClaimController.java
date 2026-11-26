@@ -1,7 +1,7 @@
+package org.example.insurance.server.mvp;
 
-package org.example.insurance.server;
 
-import org.example.insurance.client.CibSevenClient;
+import org.example.insurance.client.mvp.CibSevenClient;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 

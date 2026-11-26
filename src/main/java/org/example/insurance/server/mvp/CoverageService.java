@@ -1,4 +1,4 @@
-package org.example.insurance.server;
+package org.example.insurance.server.mvp;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import java.time.LocalDate;

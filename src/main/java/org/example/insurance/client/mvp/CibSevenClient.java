@@ -1,4 +1,4 @@
-package org.example.insurance.client;
+package org.example.insurance.client.mvp;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +17,7 @@ import jakarta.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface CibSevenClient {
+
 
     @POST
     @Path("/process-definition/key/{key}/start")
