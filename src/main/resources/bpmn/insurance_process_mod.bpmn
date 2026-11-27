@@ -488,17 +488,66 @@
     <bpmn:sequenceFlow id="Flow_15dm1zc" sourceRef="Activity_173on9a" targetRef="Activity_1ivjuwf" />
     <bpmn:sequenceFlow id="Flow_0e4yy36" sourceRef="Event_05exe0h" targetRef="Event_0mchjuo" />
     <bpmn:sequenceFlow id="Flow_0ox6c0p" sourceRef="Activity_0t3uy3l" targetRef="Event_19tx5am" />
-    <bpmn:serviceTask id="Activity_173on9a" name="Policy Issuance" camunda:expression="${true}">
+    
+          <bpmn:serviceTask
+        id="Activity_173on9a"
+        name="Policy Issuance">
+
       <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="policyNumber">POL-2026-0042</camunda:outputParameter>
-        </camunda:inputOutput>
+        <camunda:connector>
+          <camunda:inputOutput>
+
+            <camunda:inputParameter name="url">
+              http://app:8081/policies/issue
+            </camunda:inputParameter>
+
+            <camunda:inputParameter name="method">
+              POST
+            </camunda:inputParameter>
+
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="javascript">
+                JSON.stringify({
+                  applicantId: execution.getVariable("applicantId"),
+                  underwritingResult: execution.getVariable("underwritingResult")
+                })
+              </camunda:script>
+            </camunda:inputParameter>
+
+            <camunda:outputParameter name="policyIssued">
+  <camunda:script scriptFormat="javascript">
+    var result = JSON.parse(response);
+    if (!result.policyNumber || !result.applicantId) {
+      throw new Error("Policy issuance failed");
+    }
+    true;
+  </camunda:script>
+</camunda:outputParameter>
+
+<camunda:outputParameter name="policyNumber">
+  <camunda:script scriptFormat="javascript">
+    JSON.parse(response).policyNumber
+  </camunda:script>
+</camunda:outputParameter>
+
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
       </bpmn:extensionElements>
+
       <bpmn:incoming>Flow_0r94vjq</bpmn:incoming>
       <bpmn:incoming>Flow_022rgbb</bpmn:incoming>
       <bpmn:incoming>Flow_08xefn2</bpmn:incoming>
       <bpmn:outgoing>Flow_15dm1zc</bpmn:outgoing>
+
     </bpmn:serviceTask>
+
     <bpmn:sendTask id="Activity_1ivjuwf" name="Deliver Policy Documents" camunda:expression="${true}">
       <bpmn:incoming>Flow_15dm1zc</bpmn:incoming>
       <bpmn:outgoing>Flow_1qb1z69</bpmn:outgoing>
