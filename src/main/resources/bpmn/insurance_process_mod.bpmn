@@ -67,18 +67,10 @@
       <bpmn:outgoing>Flow_00aahg2</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1ywsb3q" messageRef="Message_11gaaia" />
     </bpmn:startEvent>
-
-
-    <bpmn:businessRuleTask
-    id="Activity_17vwe9l"
-    name="Insurance Eligibility Verification"
-    camunda:resultVariable="eligibilityResult"
-    camunda:decisionRef="eligibilityCheck"
-    camunda:mapDecisionResult="singleEntry">
-    <bpmn:incoming>Flow_00aahg2</bpmn:incoming>
-    <bpmn:outgoing>Flow_1iy2xc7</bpmn:outgoing>
-</bpmn:businessRuleTask>
-
+    <bpmn:businessRuleTask id="Activity_17vwe9l" name="Insurance Eligibility Verification" camunda:resultVariable="eligibilityResult" camunda:decisionRef="eligibilityCheck" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>Flow_00aahg2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1iy2xc7</bpmn:outgoing>
+    </bpmn:businessRuleTask>
     <bpmn:endEvent id="Event_0jjl6pw" name="Declined">
       <bpmn:incoming>Flow_0pfz7sg</bpmn:incoming>
       <bpmn:terminateEventDefinition id="TerminateEventDefinition_1nweroz" />
@@ -88,54 +80,42 @@
       <bpmn:outgoing>Flow_017jg34</bpmn:outgoing>
       <bpmn:serviceTask id="Activity_171sj7f" name="check if client profile is exists" camunda:expression="${true}">
         <bpmn:extensionElements>
-    <camunda:connector>
-        <camunda:connectorId>http-connector</camunda:connectorId>
-
-        <camunda:inputOutput>
-            <camunda:inputParameter name="url">
-                <camunda:script scriptFormat="javascript"><![CDATA[
+          <camunda:connector>
+            <camunda:inputOutput>
+              <camunda:inputParameter name="url">
+                <camunda:script scriptFormat="javascript">
                     "http://app:8081/applicants/exists?name="
                     + encodeURIComponent(execution.getVariable("name"))
-                    + "&dateOfBirth="
+                    + "&amp;dateOfBirth="
                     + encodeURIComponent(execution.getVariable("dateOfBirth"))
-                ]]></camunda:script>
-            </camunda:inputParameter>
-
-            <camunda:inputParameter name="method">GET</camunda:inputParameter>
-
-            <camunda:outputParameter name="clientFileExists">
-                <camunda:script scriptFormat="javascript"><![CDATA[
+                </camunda:script>
+              </camunda:inputParameter>
+              <camunda:inputParameter name="method">GET</camunda:inputParameter>
+              <camunda:outputParameter name="clientFileExists">
+                <camunda:script scriptFormat="javascript">
                     response.trim() === "true"
-                ]]></camunda:script>
-            </camunda:outputParameter>
-        </camunda:inputOutput>
-    </camunda:connector>
-</bpmn:extensionElements>
+                </camunda:script>
+              </camunda:outputParameter>
+            </camunda:inputOutput>
+            <camunda:connectorId>http-connector</camunda:connectorId>
+          </camunda:connector>
+        </bpmn:extensionElements>
         <bpmn:incoming>Flow_0ixo4i3</bpmn:incoming>
         <bpmn:outgoing>Flow_05ldbwl</bpmn:outgoing>
       </bpmn:serviceTask>
-      <bpmn:serviceTask
-    id="Activity_00bdxmp"
-    name="create new client file"
-    >
-
-    <bpmn:extensionElements>
-        <camunda:connector>
-            <camunda:connectorId>http-connector</camunda:connectorId>
+      <bpmn:serviceTask id="Activity_00bdxmp" name="create new client file">
+        <bpmn:extensionElements>
+          <camunda:connector>
             <camunda:inputOutput>
-
-                <camunda:inputParameter name="url">http://app:8081/applicants</camunda:inputParameter>
-
-                <camunda:inputParameter name="method">POST</camunda:inputParameter>
-
-                <camunda:inputParameter name="headers">
-                    <camunda:map>
-                        <camunda:entry key="Content-Type">application/json</camunda:entry>
-                    </camunda:map>
-                </camunda:inputParameter>
-
-                <camunda:inputParameter name="payload">
-                    <camunda:script scriptFormat="javascript"><![CDATA[
+              <camunda:inputParameter name="url">http://app:8081/applicants</camunda:inputParameter>
+              <camunda:inputParameter name="method">POST</camunda:inputParameter>
+              <camunda:inputParameter name="headers">
+                <camunda:map>
+                  <camunda:entry key="Content-Type">application/json</camunda:entry>
+                </camunda:map>
+              </camunda:inputParameter>
+              <camunda:inputParameter name="payload">
+                <camunda:script scriptFormat="javascript">
                         JSON.stringify({
                             name: execution.getVariable("name"),
                             gender: execution.getVariable("gender"),
@@ -155,44 +135,31 @@
                             tariffBenefitLevel: execution.getVariable("tariffBenefitLevel"),
                             priorAdverseDecision: execution.getVariable("priorAdverseDecision")
                         });
-                    ]]></camunda:script>
-                </camunda:inputParameter>
-
+                    </camunda:script>
+              </camunda:inputParameter>
             </camunda:inputOutput>
-        </camunda:connector>
-    </bpmn:extensionElements>
-
-    <bpmn:incoming>Flow_05h9k1l</bpmn:incoming>
-    <bpmn:outgoing>Flow_0aosz2h</bpmn:outgoing>
-
-    <bpmn:dataOutputAssociation id="DataOutputAssociation_1j5npql">
-        <bpmn:targetRef>DataStoreReference_0eve6dz</bpmn:targetRef>
-    </bpmn:dataOutputAssociation>
-
-</bpmn:serviceTask>
-   
-     
-<bpmn:serviceTask
-    id="Activity_023faah"
-    name="renew client file">
-
-    <bpmn:extensionElements>
-        <camunda:connector>
             <camunda:connectorId>http-connector</camunda:connectorId>
-
+          </camunda:connector>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_05h9k1l</bpmn:incoming>
+        <bpmn:outgoing>Flow_0aosz2h</bpmn:outgoing>
+        <bpmn:dataOutputAssociation id="DataOutputAssociation_1j5npql">
+          <bpmn:targetRef>DataStoreReference_0eve6dz</bpmn:targetRef>
+        </bpmn:dataOutputAssociation>
+      </bpmn:serviceTask>
+      <bpmn:serviceTask id="Activity_023faah" name="renew client file">
+        <bpmn:extensionElements>
+          <camunda:connector>
             <camunda:inputOutput>
-                <camunda:inputParameter name="url">http://app:8081/applicants/renew</camunda:inputParameter>
-
-                <camunda:inputParameter name="method">POST</camunda:inputParameter>
-
-                <camunda:inputParameter name="headers">
-                    <camunda:map>
-                        <camunda:entry key="Content-Type">application/json</camunda:entry>
-                    </camunda:map>
-                </camunda:inputParameter>
-
-                <camunda:inputParameter name="payload">
-                    <camunda:script scriptFormat="javascript"><![CDATA[
+              <camunda:inputParameter name="url">http://app:8081/applicants/renew</camunda:inputParameter>
+              <camunda:inputParameter name="method">POST</camunda:inputParameter>
+              <camunda:inputParameter name="headers">
+                <camunda:map>
+                  <camunda:entry key="Content-Type">application/json</camunda:entry>
+                </camunda:map>
+              </camunda:inputParameter>
+              <camunda:inputParameter name="payload">
+                <camunda:script scriptFormat="javascript">
                         JSON.stringify({
                             name: execution.getVariable("name"),
                             gender: execution.getVariable("gender"),
@@ -212,25 +179,18 @@
                             tariffBenefitLevel: execution.getVariable("tariffBenefitLevel"),
                             priorAdverseDecision: execution.getVariable("priorAdverseDecision")
                         });
-                    ]]></camunda:script>
-                </camunda:inputParameter>
-
+                    </camunda:script>
+              </camunda:inputParameter>
             </camunda:inputOutput>
-        </camunda:connector>
-    </bpmn:extensionElements>
-
-    <bpmn:incoming>Flow_08out53</bpmn:incoming>
-    <bpmn:outgoing>Flow_0sq0b6u</bpmn:outgoing>
-
-    <bpmn:dataOutputAssociation id="DataOutputAssociation_1t0ud67">
-        <bpmn:targetRef>DataStoreReference_0eve6dz</bpmn:targetRef>
-    </bpmn:dataOutputAssociation>
-
-</bpmn:serviceTask>
-
-
-
-
+            <camunda:connectorId>http-connector</camunda:connectorId>
+          </camunda:connector>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_08out53</bpmn:incoming>
+        <bpmn:outgoing>Flow_0sq0b6u</bpmn:outgoing>
+        <bpmn:dataOutputAssociation id="DataOutputAssociation_1t0ud67">
+          <bpmn:targetRef>DataStoreReference_0eve6dz</bpmn:targetRef>
+        </bpmn:dataOutputAssociation>
+      </bpmn:serviceTask>
       <bpmn:exclusiveGateway id="Gateway_1ocsetu" name="Exists?" default="Flow_05h9k1l">
         <bpmn:incoming>Flow_05ldbwl</bpmn:incoming>
         <bpmn:outgoing>Flow_05h9k1l</bpmn:outgoing>
@@ -263,7 +223,7 @@
     <bpmn:sequenceFlow id="Flow_1iy2xc7" sourceRef="Activity_17vwe9l" targetRef="Gateway_10z4f12" />
     <bpmn:sequenceFlow id="Flow_0pfz7sg" name="No" sourceRef="Gateway_10z4f12" targetRef="Event_0jjl6pw" />
     <bpmn:sequenceFlow id="Flow_0ogacx9" name="Yes" sourceRef="Gateway_10z4f12" targetRef="Activity_1azt3ts">
-  <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${execution.getVariable("eligibilityResult") == "eligible"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${execution.getVariable("eligibilityResult") == "eligible"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_00aahg2" sourceRef="Event_00kdrmo" targetRef="Activity_17vwe9l" />
     <bpmn:subProcess id="Activity_1da53z9" name="Manual Underwriting">
