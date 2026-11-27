@@ -18,6 +18,7 @@ public class PolicyController {
 
     public record IssuePolicyRequest(
             UUID applicantId,
+            UUID insuranceTypeId,
             String underwritingResult) {
     }
 
@@ -30,6 +31,7 @@ public class PolicyController {
         if (request == null
                 || request.applicantId() == null
                 || request.underwritingResult() == null
+                || request.insuranceTypeId() == null
                 || request.underwritingResult().isBlank()) {
 
             return Response.status(Response.Status.BAD_REQUEST)
@@ -40,6 +42,7 @@ public class PolicyController {
         try {
             Policy policy = policyService.issuePolicy(
                     request.applicantId(),
+                    request.insuranceTypeId(),
                     request.underwritingResult());
 
             return Response.status(Response.Status.CREATED)

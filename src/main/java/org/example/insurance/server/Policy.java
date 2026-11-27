@@ -8,6 +8,7 @@ public class Policy {
 
     public UUID id;
     public UUID applicantId;
+    public UUID insuranceTypeId;
     public String policyNumber;
     public String underwritingResult;
     public String contractText;

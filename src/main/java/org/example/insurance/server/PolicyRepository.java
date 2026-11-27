@@ -16,18 +16,23 @@ public class PolicyRepository {
     @Inject
     DataSource dataSource;
 
-    public void save(Policy policy) throws SQLException {
-
+    public Policy save(Policy policy) throws SQLException {
         String sql = """
                 INSERT INTO policy (
-                    policy_id,
-                    applicant_id,
-                    policy_number,
-                    underwriting_result,
-                    contract_text,
-                    created_at
+                    policy_id, applicant_id, insurance_type_id,
+                    policy_number, underwriting_result,
+                    contract_text, created_at
                 )
-                VALUES (?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT (applicant_id, insurance_type_id)
+                DO UPDATE SET
+                    underwriting_result = EXCLUDED.underwriting_result,
+                    contract_text = REPLACE(
+                        EXCLUDED.contract_text,
+                        EXCLUDED.policy_number,
+                        policy.policy_number
+                    )
+                RETURNING policy_id, policy_number, contract_text, created_at
                 """;
 
         try (Connection conn = dataSource.getConnection();
@@ -35,13 +40,21 @@ public class PolicyRepository {
 
             stmt.setObject(1, policy.id);
             stmt.setObject(2, policy.applicantId);
-            stmt.setString(3, policy.policyNumber);
-            stmt.setString(4, policy.underwritingResult);
-            stmt.setString(5, policy.contractText);
-            stmt.setTimestamp(6, Timestamp.valueOf(policy.createdAt));
+            stmt.setObject(3, policy.insuranceTypeId);
+            stmt.setString(4, policy.policyNumber);
+            stmt.setString(5, policy.underwritingResult);
+            stmt.setString(6, policy.contractText);
+            stmt.setTimestamp(7, Timestamp.valueOf(policy.createdAt));
 
-            stmt.executeUpdate();
+            try (ResultSet rs = stmt.executeQuery()) {
+                rs.next();
+                policy.id = rs.getObject("policy_id", UUID.class);
+                policy.policyNumber = rs.getString("policy_number");
+                policy.contractText = rs.getString("contract_text");
+                policy.createdAt = rs.getTimestamp("created_at").toLocalDateTime();
+            }
         }
+        return policy;
     }
 
     public List<Policy> findByApplicantId(UUID applicantId)

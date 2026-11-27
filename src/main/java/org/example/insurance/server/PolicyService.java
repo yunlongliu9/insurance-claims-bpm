@@ -17,7 +17,8 @@ public class PolicyService {
 
     public Policy issuePolicy(
             UUID applicantId,
-            String underwritingResult) throws SQLException {
+            UUID insuranceTypeId,
+                    String underwritingResult) throws SQLException {
 
         if (applicantId == null) {
             throw new IllegalArgumentException(
@@ -46,7 +47,7 @@ public class PolicyService {
         policy.policyNumber = "POL-" + policy.id.toString().substring(0, 8).toUpperCase();
         policy.underwritingResult = result;
         policy.createdAt = LocalDateTime.now();
-
+        policy.insuranceTypeId = insuranceTypeId;
         policy.contractText = generateContract(
                 policy.policyNumber,
                 result);
