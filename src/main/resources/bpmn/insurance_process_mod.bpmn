@@ -88,6 +88,10 @@
                     + encodeURIComponent(execution.getVariable("name"))
                     + "&amp;dateOfBirth="
                     + encodeURIComponent(execution.getVariable("dateOfBirth"))
+                    + "&amp;identityDocumentNumber="
+                    + encodeURIComponent(execution.getVariable("identityDocumentNumber"))
+                    + "&amp;identityDocumentCountry="
+                    + encodeURIComponent(execution.getVariable("identityDocumentCountry"))
                 </camunda:script>
               </camunda:inputParameter>
               <camunda:inputParameter name="method">GET</camunda:inputParameter>
@@ -133,7 +137,9 @@
                             medicationOngoing: execution.getVariable("medicationOngoing"),
                             bmi: execution.getVariable("bmi"),
                             tariffBenefitLevel: execution.getVariable("tariffBenefitLevel"),
-                            priorAdverseDecision: execution.getVariable("priorAdverseDecision")
+                            priorAdverseDecision: execution.getVariable("priorAdverseDecision"),
+                            identityDocumentNumber: execution.getVariable("identityDocumentNumber"),
+                            identityDocumentCountry: execution.getVariable("identityDocumentCountry")
                         });
                     </camunda:script>
               </camunda:inputParameter>
@@ -177,7 +183,9 @@
                             medicationOngoing: execution.getVariable("medicationOngoing"),
                             bmi: execution.getVariable("bmi"),
                             tariffBenefitLevel: execution.getVariable("tariffBenefitLevel"),
-                            priorAdverseDecision: execution.getVariable("priorAdverseDecision")
+                            priorAdverseDecision: execution.getVariable("priorAdverseDecision"),
+                            identityDocumentNumber: execution.getVariable("identityDocumentNumber"),
+identityDocumentCountry: execution.getVariable("identityDocumentCountry")
                         });
                     </camunda:script>
               </camunda:inputParameter>

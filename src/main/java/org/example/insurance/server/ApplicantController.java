@@ -24,9 +24,12 @@ public class ApplicantController {
     @Produces(MediaType.TEXT_PLAIN)
     public boolean applicantExists(
             @QueryParam("name") String name,
-            @QueryParam("dateOfBirth") String dateOfBirth
-    ) throws Exception {
-        return applicantService.applicantExists(name, dateOfBirth);
+            @QueryParam("dateOfBirth") String dateOfBirth,
+            @QueryParam("identityDocumentNumber") String identityDocumentNumber,
+            @QueryParam("identityDocumentCountry") String identityDocumentCountry) throws Exception {
+        return applicantService.applicantExists(
+                name, dateOfBirth,
+                identityDocumentNumber, identityDocumentCountry);
     }
 
     @POST

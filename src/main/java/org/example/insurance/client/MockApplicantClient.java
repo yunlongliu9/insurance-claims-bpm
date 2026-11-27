@@ -70,7 +70,9 @@ public class MockApplicantClient {
                     "psychotherapy": {"value": false, "type": "Boolean"},
                     "outpatientTreatment": {"value": false, "type": "Boolean"},
                     "dentalTreatment": {"value": false, "type": "Boolean"},
-                    "deductible": {"value": 1000, "type": "Integer"}
+                    "deductible": {"value": 1000, "type": "Integer"},
+                    "identityDocumentNumber": {"value": "TEST123456", "type": "String"},
+        "identityDocumentCountry": {"value": "DE", "type": "String"},
                   }
                 }
                 """.formatted(

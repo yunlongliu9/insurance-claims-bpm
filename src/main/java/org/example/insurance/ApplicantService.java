@@ -22,15 +22,19 @@ public class ApplicantService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public boolean applicantExists(String name, String dateOfBirth)
-            throws Exception {
+    public boolean applicantExists(
+            String name,
+            String dateOfBirth,
+            String identityDocumentNumber,
+            String identityDocumentCountry) throws Exception {
 
         String sql = """
                 SELECT EXISTS (
-                    SELECT 1
-                    FROM applicant
+                    SELECT 1 FROM applicant
                     WHERE name = ?
                       AND date_of_birth = ?
+                      AND identity_document_number = ?
+                      AND identity_document_country = ?
                 )
                 """;
 
@@ -39,6 +43,8 @@ public class ApplicantService {
 
             stmt.setString(1, name);
             stmt.setDate(2, Date.valueOf(dateOfBirth));
+            stmt.setString(3, identityDocumentNumber);
+            stmt.setString(4, identityDocumentCountry);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 rs.next();
@@ -59,7 +65,8 @@ public class ApplicantService {
                     psychotherapy_flag = ?, spinal_history = ?, allergy_flag = ?,
                     medication_ongoing = ?, bmi = ?, tariff_benefit_level = ?,
                     prior_adverse_decision = ?
-                WHERE name = ? AND date_of_birth = ?
+                WHERE identity_document_country = ?
+  AND identity_document_number = ?
                 """;
 
         try (Connection conn = dataSource.getConnection();
@@ -82,9 +89,8 @@ public class ApplicantService {
             stmt.setDouble(15, applicant.path("bmi").asDouble());
             stmt.setString(16, applicant.path("tariffBenefitLevel").asText());
             stmt.setBoolean(17, applicant.path("priorAdverseDecision").asBoolean());
-            stmt.setString(18, applicant.path("name").asText());
-            stmt.setDate(19, Date.valueOf(applicant.path("dateOfBirth").asText()));
-
+            stmt.setString(18, applicant.path("identityDocumentCountry").asText());
+            stmt.setString(19, applicant.path("identityDocumentNumber").asText());
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated == 0) {
                 throw new Exception("No rows updated. Applicant not found.");
@@ -104,9 +110,10 @@ public class ApplicantService {
                     chronic_condition_flag, inpatient_treatment_flag,
                     psychotherapy_flag, spinal_history, allergy_flag,
                     medication_ongoing, bmi, tariff_benefit_level,
-                    prior_adverse_decision, identity
+                    prior_adverse_decision, identity,
+identity_document_number, identity_document_country
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'applicant')
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'applicant', ?, ?)
                 """;
 
         try (Connection conn = dataSource.getConnection();
@@ -129,7 +136,8 @@ public class ApplicantService {
             stmt.setDouble(15, applicant.path("bmi").asDouble());
             stmt.setString(16, applicant.path("tariffBenefitLevel").asText());
             stmt.setBoolean(17, applicant.path("priorAdverseDecision").asBoolean());
-
+            stmt.setString(18, applicant.path("identityDocumentNumber").asText());
+            stmt.setString(19, applicant.path("identityDocumentCountry").asText());
             stmt.executeUpdate();
         }
     }
